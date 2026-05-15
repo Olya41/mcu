@@ -19,6 +19,8 @@ pico_sdk_init()
 add_executable(${PROJECT_NAME}
 	${CMAKE_CURRENT_SOURCE_DIR}/main.c
 	${CMAKE_CURRENT_SOURCE_DIR}/stdio-task/stdio-task.c
+	${CMAKE_CURRENT_SOURCE_DIR}/led-task/led-task.c
+	${CMAKE_CURRENT_SOURCE_DIR}/protocol-task/protocol-task.c
 )
 
 
