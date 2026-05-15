@@ -80,14 +80,14 @@ void wmem_callback(const char* args)
 void help_callback(const char* args);
 
 const api_t device_api[] = {
-	{"version",    version_callback,                 "print device name and firmware version"},
-	{"on",         led_on_callback,                  "turn LED on"},
-	{"off",        led_off_callback,                 "turn LED off"},
-	{"blink",      led_blink_callback,               "blink LED"},
-	{"set_period", led_blink_set_period_ms_callback, "set blink period in ms"},
-	{"mem",        mem_callback,                     "read word from address: mem <addr_hex>"},
-	{"wmem",       wmem_callback,                    "write word to address: wmem <addr_hex> <val_hex>"},
-	{"help",       help_callback,                    "print commands description"},
+	{"version",              version_callback,                 "get device name and firmware version"},
+	{"on",                   led_on_callback,                  "switch on led"},
+	{"off",                  led_off_callback,                 "switch off led"},
+	{"blink",                led_blink_callback,               "provide unblocking"},
+	{"set_period",           led_blink_set_period_ms_callback, "blinking with arguments"},
+	{"mem",                  mem_callback,                     "read from memory"},
+	{"wmem",                 wmem_callback,                    "write in memory"},
+	{"help",                 help_callback,                    "print commands description"},
 	{NULL, NULL, NULL},
 };
 

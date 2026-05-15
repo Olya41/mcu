@@ -10,21 +10,27 @@ set(PICO_PLATFORM rp2040)
 include(pico_sdk_import.cmake)
 
 # Создаем проект. Аргументом указывается имя проекта - типовая строчка для любого CMakeLists.txt
-project(02_control)
+project(04_bme)
 
 # Вызываем функцию инициализации Pico SDK - специфика сборки под Pico
 pico_sdk_init()
+
+add_subdirectory("../libs/protocol" "${PROJECT_BINARY_DIR}/protocol")
+add_subdirectory("../libs/bme280-driver" "${PROJECT_BINARY_DIR}/bme280-driver")
 
 # Добавляем в проект файлы с исходным кодом - типовая строчка для любого CMakeLists.txt
 add_executable(${PROJECT_NAME}
 	${CMAKE_CURRENT_SOURCE_DIR}/main.c
 	${CMAKE_CURRENT_SOURCE_DIR}/stdio-task/stdio-task.c
+	${CMAKE_CURRENT_SOURCE_DIR}/led-task/led-task.c
 )
-
 
 # Указываем на какие библиотеки ссылается наш код - типовая строчка для любого CMakeLists.txt
 target_link_libraries(${PROJECT_NAME}
 	pico_stdlib
+	hardware_i2c
+	protocol
+	bme280_driver
 )
 
 # Указываем файл, в котором находится линкер скрипт - специфика сборки под МК
@@ -32,7 +38,6 @@ pico_set_linker_script(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/memmap_rp2040
 
 # Добавляем задачи генерации бинарника в разных форматах - специфика сборки под Pico
 pico_add_extra_outputs(${PROJECT_NAME})
-
 
 pico_enable_stdio_uart(${PROJECT_NAME} 0)
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
